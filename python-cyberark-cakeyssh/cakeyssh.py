@@ -90,8 +90,8 @@ def _parse_args():
         "safe",
         help="Name of CyberArk Safe containing account entry")
     parser.add_argument(
-        "hostname",
-        help="Hostname of SSH host")
+        "target_host",
+        help="Target SSH hostname/IP")
     parser.add_argument(
         "--cyberark-fqdn",
         help="FQDN of CyberArk instance",
@@ -207,7 +207,7 @@ if __name__ == '__main__':
 
     # Initiate SSH connection
     try:
-        ssh.connect(hostname=args.hostname, username=args.username, pkey=key)
+        ssh.connect(hostname=args.target_host, username=args.username, pkey=key)
     except TimeoutError as e:
         raise SystemExit(f'SSH connection timed-out: {e}')
     except socket.gaierror as e:
